@@ -19,3 +19,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/tasks', App\Http\Controllers\Task\IndexController::class)->name('tasks.index');
+Route::get('/stages', App\Http\Controllers\Stage\IndexController::class)->name('stages.index');

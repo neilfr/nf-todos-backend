@@ -25,6 +25,5 @@ class IndexControllerTest extends TestCase
         $tasks->each(function ($task, $index) use ($returnedTasks) {
             self::assertEquals($task->description, $returnedTasks[$index]['description']);
         });
-
     }
 }
