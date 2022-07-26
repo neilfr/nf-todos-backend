@@ -16,9 +16,11 @@ return new class extends Migration
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
             $table->string('description');
-            $table->string('stage');
+            $table->unsignedBigInteger('stage_id')->nullable();
             $table->integer('priority');
             $table->timestamps();
+
+            $table->foreign('stage_id')->references('id')->on('stages');
         });
     }
 

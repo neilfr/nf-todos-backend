@@ -26,7 +26,6 @@ class TaskFactory extends Factory
     {
         return [
             'description' => $this->faker->words(3,true),
-            'stage' => $this->faker->word(),
             'priority' => 1,
         ];
     }
