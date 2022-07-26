@@ -15,7 +15,6 @@ class IndexControllerTest extends TestCase
     /** @test */
     public function it_returns_tasks()
     {
-        $this->withoutExceptionHandling();
         $tasks = Task::factory(2)->create();
         $response = $this->get('/api/tasks');
 
@@ -43,5 +42,6 @@ class IndexControllerTest extends TestCase
 
         self::assertCount(1,$returnedTasks);
         self::assertEquals($returnedTasks[0]['stage'], $stage->description);
+        self::assertEquals($returnedTasks[0]['stage_id'], $stage->id);
     }
 }
