@@ -36,7 +36,7 @@ class IndexControllerTest extends TestCase
             "stage_id" => $stage->id,
             ]);
 
-        $response = $this->get(route('tasks.index'));
+        $response = $this->get(route('api.tasks.index'));
 
         $returnedTasks = collect($response->original);
 

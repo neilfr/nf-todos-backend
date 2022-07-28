@@ -11,6 +11,26 @@ class UpdateControllerTest extends TestCase
 {
     use RefreshDatabase;
 
+    /** @test */
+    public function it_updates_stages_id()
+    {
+        $initialStage = Stage::factory()->create();
+        $updatedStage = Stage::factory()->create();
+
+        $task = Task::factory()->create([
+            "stage_id" => $initialStage->id,
+        ]);
+
+        $this->patch(route('api.tasks.update', $task),[
+            'stage_id' => $updatedStage->id,
+        ]);
+
+        $this->assertDatabaseHas('tasks',[
+            "id" => $task->id,
+            'stage_id' => $updatedStage->id,
+        ]);
+    }
+
     /** @test
      *  @dataProvider taskUpdateValidationProvider
      */
@@ -22,7 +42,7 @@ class UpdateControllerTest extends TestCase
             "stage_id" => $stages[0]->id,
         ]);
 
-        $this->patch(route('tasks.update', $task),[
+        $this->patch(route('api.tasks.update', $task),[
             $key => $value,
         ]);
 
@@ -35,7 +55,6 @@ class UpdateControllerTest extends TestCase
     public function taskUpdateValidationProvider()
     {
         return [
-            'stage_id must be a valid stage id' => ['stage_id', 2],
             'priority must be a number greater than 0' => ['priority', 3],
             'description must be a string' => ['description', 'hello'],
         ];
@@ -56,7 +75,7 @@ class UpdateControllerTest extends TestCase
           $key => $value,
         ];
 
-        $response = $this->patch(route('tasks.update', $task), $payload);
+        $response = $this->patch(route('api.tasks.update', $task), $payload);
 
         $response->assertSessionHasErrors($key);
     }

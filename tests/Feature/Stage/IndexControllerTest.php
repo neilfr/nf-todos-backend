@@ -4,7 +4,6 @@ namespace Tests\Feature\Stage;
 
 use App\Models\Stage;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class IndexControllerTest extends TestCase
@@ -15,7 +14,7 @@ class IndexControllerTest extends TestCase
     public function it_returns_stages()
     {
         $stages = Stage::factory(2)->create();
-        $response = $this->get('/api/stages');
+        $response = $this->get(route('api.stages.index'));
 
         $response->assertStatus(200);
 
