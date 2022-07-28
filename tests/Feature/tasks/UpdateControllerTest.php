@@ -60,7 +60,8 @@ class UpdateControllerTest extends TestCase
         ];
     }
 
-    /** @test
+    /**
+     * @test
      *  @dataProvider taskUpdateErrorValidationProvider
      */
     public function it_returns_error_when_payload_not_valid($key, $value)
