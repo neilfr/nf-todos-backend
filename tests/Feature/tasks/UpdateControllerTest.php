@@ -5,35 +5,44 @@ namespace Tests\Feature\tasks;
 use App\Models\Stage;
 use App\Models\Task;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class UpdateControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
-    public function it_updates_stage_on_a_task()
+    /** @test
+     *  @dataProvider taskUpdateValidationProvider
+     */
+    public function it_updates_a_task($key, $value)
     {
-        $initialStage = Stage::factory()->create();
-        $updatedStage = Stage::factory()->create();
+        $stages = Stage::factory(2)->create();
 
         $task = Task::factory()->create([
-            "stage_id" => $initialStage->id,
+            "stage_id" => $stages[0]->id,
         ]);
 
         $this->patch(route('tasks.update', $task),[
-            "stage_id" => $updatedStage->id,
+            $key => $value,
         ]);
 
         $this->assertDatabaseHas('tasks',[
             "id" => $task->id,
-            "stage_id" => $updatedStage->id,
+            $key => $value,
         ]);
     }
 
+    public function taskUpdateValidationProvider()
+    {
+        return [
+            'stage_id must be a valid stage id' => ['stage_id', 2],
+            'priority must be a number greater than 0' => ['priority', 3],
+            'description must be a string' => ['description', 'hello'],
+        ];
+    }
+
     /** @test
-     *  @dataProvider taskUpdateValidationProvider
+     *  @dataProvider taskUpdateErrorValidationProvider
      */
     public function it_returns_error_when_payload_not_valid($key, $value)
     {
@@ -52,7 +61,7 @@ class UpdateControllerTest extends TestCase
         $response->assertSessionHasErrors($key);
     }
 
-    public function taskUpdateValidationProvider()
+    public function taskUpdateErrorValidationProvider()
     {
         return [
             'stage_id cannot be a string'=>["stage_id","not a valid stage_id"],

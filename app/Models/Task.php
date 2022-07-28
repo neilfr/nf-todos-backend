@@ -9,6 +9,8 @@ class Task extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['stage_id', 'priority', 'description'];
+
     public function stage()
     {
         return $this->belongsTo(Stage::class);

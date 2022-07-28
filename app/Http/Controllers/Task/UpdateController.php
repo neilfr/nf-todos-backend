@@ -17,7 +17,6 @@ class UpdateController extends Controller
      */
     public function __invoke(Task $task, UpdateRequest $request)
     {
-        $task->stage_id = $request->stage_id;
-        $task->save();
+        $task->update($request->validated());
     }
 }
