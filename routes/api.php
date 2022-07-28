@@ -19,4 +19,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/tasks', App\Http\Controllers\Task\IndexController::class)->name('tasks.index');
+Route::patch('/tasks/{task}', App\Http\Controllers\Task\UpdateController::class)->name('tasks.update');
 Route::get('/stages', App\Http\Controllers\Stage\IndexController::class)->name('stages.index');
