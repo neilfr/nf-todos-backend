@@ -17,8 +17,7 @@ class UpdateController extends Controller
      */
     public function __invoke(Task $task, UpdateRequest $request)
     {
-        return $request->all();
-//        $task->update($request->validated());
+        $task->update($request->validated());
         return $task;
     }
 }
