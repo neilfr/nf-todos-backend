@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Task;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use function Symfony\Component\Console\Style\success;
 
 class DestroyController extends Controller
 {
@@ -14,11 +16,10 @@ class DestroyController extends Controller
      *
      * @param Task $task
      * @param Request $request
-     * @return RedirectResponse
      */
     public function __invoke(Task $task, Request $request)
     {
         $task->delete();
-        return redirect()->route('tasks.index');
+        return Response::HTTP_OK;
     }
 }
