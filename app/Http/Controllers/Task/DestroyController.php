@@ -4,10 +4,8 @@ namespace App\Http\Controllers\Task;
 
 use App\Http\Controllers\Controller;
 use App\Models\Task;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use function Symfony\Component\Console\Style\success;
 
 class DestroyController extends Controller
 {
