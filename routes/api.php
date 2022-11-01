@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// add auth:sanctum middleware for the below once user login is working
     Route::get('/tasks', App\Http\Controllers\Task\IndexController::class)->name('api.tasks.index');
     Route::patch('/tasks/{task}', App\Http\Controllers\Task\UpdateController::class)->name('api.tasks.update');
     Route::delete('/tasks/{task}', App\Http\Controllers\Task\DestroyController::class)->name('api.tasks.destroy');
