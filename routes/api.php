@@ -19,7 +19,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 // add auth:sanctum middleware for the below once user login is working
-    Route::get('/tasks', App\Http\Controllers\Task\IndexController::class)->name('api.tasks.index');
+//    Route::get('/tasks', App\Http\Controllers\Task\IndexController::class)->name('api.tasks.index');
+    Route::middleware('auth:sanctum')->get('/tasks', App\Http\Controllers\Task\IndexController::class)->name('api.tasks.index');
     Route::patch('/tasks/{task}', App\Http\Controllers\Task\UpdateController::class)->name('api.tasks.update');
     Route::delete('/tasks/{task}', App\Http\Controllers\Task\DestroyController::class)->name('api.tasks.destroy');
     Route::post('/tasks', App\Http\Controllers\Task\StoreController::class)->name('api.tasks.store');
