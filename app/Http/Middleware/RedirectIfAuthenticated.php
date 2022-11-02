@@ -23,7 +23,8 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
+// NF: I commented this out since this is a SPA, so there should be no server side redirect
+//                return redirect(RouteServiceProvider::HOME);
             }
         }
 
