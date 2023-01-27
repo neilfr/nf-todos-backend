@@ -14,7 +14,6 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'stage_id' => 'exists:stages,id',
             'description' => 'string',
             'priority' => 'integer|min:1'
         ];
