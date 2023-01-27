@@ -21,7 +21,7 @@ class StoreController extends Controller
         $task = new Task();
         $task->description = $request->description;
         $task->priority = $request->priority;
-        $task->stage_id = $request->stage_id ?? 2;
+        $task->stage_id = $request->stage_id ?? env('DEFAULT_STAGE_ID_FOR_NEW_TASKS');
         $task->save();
         return new TaskResource($task);
     }
